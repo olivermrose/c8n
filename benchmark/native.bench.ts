@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { bench, describe } from "vitest";
-import { every, filter, find, forEach, map, reduce, some } from "../";
+import { every, filter, find, forEach, map, reduce, some } from "../src";
 
 const accounts = faker.helpers.multiple(
 	() => {
