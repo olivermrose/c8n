@@ -1,7 +1,7 @@
 {
 	"name": "c8n",
 	"version": "0.3.0",
-	"description": "",
+	"description": "A modern and functional kitchen sink collection library inspired by Kotlin, Ruby, and Rust.",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
