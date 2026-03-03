@@ -1,5 +1,5 @@
-import type { Rest } from "./_internal";
 import type { zip, zipStrict } from "./";
+import type { Rest } from "./_internal";
 
 /**
  * Produces a generator that yields pairs of corresponding elements from the

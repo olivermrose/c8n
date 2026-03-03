@@ -1,5 +1,5 @@
-import type { Rest } from "./_internal";
 import type { combinations, permutations } from "./";
+import type { Rest } from "./_internal";
 
 /**
  * Produces a generator that yields the Cartesian product of the
