@@ -1,11 +1,13 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, configDefaults } from "vitest/config";
 
 export default defineConfig({
 	test: {
-		include: ["src/**/*.ts"],
-		exclude: ["src/index.ts", "src/_internal.ts"],
+		includeSource: ["src/**/*.ts"],
+		exclude: ["src/index.ts", "src/_internal.ts", ...configDefaults.exclude],
 		coverage: {
 			enabled: true,
+			include: ["src/**/*.ts"],
+			exclude: ["src/index.ts", "src/_internal.ts"],
 		},
 	},
 });
