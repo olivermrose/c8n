@@ -2,27 +2,19 @@
 	"name": "c8n",
 	"version": "0.3.0",
 	"description": "A modern and functional kitchen sink collection library inspired by Kotlin, Ruby, and Rust.",
-	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"author": "Oliver Rose <hello@olivermrose.com>",
-	"prettier": {
-		"semi": true,
-		"tabWidth": 4,
-		"useTabs": true,
-		"printWidth": 100
-	},
 	"files": [
 		"dist"
 	],
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "tsdown",
 		"test": "vitest",
 		"bench": "vitest bench",
-		"style": "pnpm lint:fix && pnpm prettier",
-		"lint": "eslint .",
-		"lint:fix": "eslint src/*.ts --fix",
-		"prettier": "prettier -w .",
+		"lint": "oxfmt --check && oxlint .",
+		"lint:fix": "oxfmt && oxlint src/*.ts --fix",
 		"prepublish": "pnpm build"
 	},
 	"devDependencies": {
@@ -30,9 +22,9 @@
 		"@faker-js/faker": "^10.3.0",
 		"@types/node": "^25.3.3",
 		"@vitest/coverage-v8": "^4.0.18",
-		"eslint": "^10.0.2",
-		"eslint-config-prettier": "^10.1.8",
-		"prettier": "^3.8.1",
+		"oxfmt": "^0.36.0",
+		"oxlint": "^1.51.0",
+		"oxlint-tsgolint": "^0.15.0",
 		"tsdown": "0.21.0-beta.2",
 		"typescript": "^5.9.3",
 		"vitest": "^4.0.18"
