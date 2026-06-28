@@ -26,7 +26,7 @@ export function* dropLast<T>(iterable: Iterable<T>, count: number): Generator<T>
 		throw new RangeError("'count' must be positive");
 	}
 
-	const array = Array.from(iterable);
+	const array = Array.isArray(iterable) ? iterable : Array.from(iterable);
 	yield* take(array, Math.max(array.length - count, 0));
 }
 
@@ -41,6 +41,10 @@ if (import.meta.vitest) {
 		expect(iter.next().value).toBe(2);
 		expect(iter.next().value).toBe(3);
 		expect(iter.next().done).toBe(true);
+	});
+
+	it("dropLast with a non-array iterable", () => {
+		expect(dropLast(new Set([1, 2, 3, 4, 5]), 2).toArray()).toEqual([1, 2, 3]);
 	});
 
 	it("dropLast throws with negative count", () => {

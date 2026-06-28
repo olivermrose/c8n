@@ -15,6 +15,10 @@
  * ```
  */
 export function last<T>(iterable: Iterable<T>): T | undefined {
+	if (Array.isArray(iterable)) {
+		return iterable[iterable.length - 1];
+	}
+
 	let last: T | undefined;
 
 	const iterator = iterable[Symbol.iterator]();
@@ -37,6 +41,8 @@ if (import.meta.vitest) {
 		const numbers = new Set([1, 2, 3, 4, 5]);
 
 		expect(last(numbers)).toBe(5);
+		expect(last([1, 2, 3])).toBe(3);
 		expect(last([])).toBeUndefined();
+		expect(last(new Set<number>())).toBeUndefined();
 	});
 }

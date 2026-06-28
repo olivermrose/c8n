@@ -24,9 +24,9 @@ export function* takeLast<T>(iterable: Iterable<T>, count: number): Generator<T>
 		throw new RangeError("'count' must be positive");
 	}
 
-	const array = Array.from(iterable);
+	const array = Array.isArray(iterable) ? iterable : Array.from(iterable);
 
-	for (let i = array.length - count; i < array.length; i++) {
+	for (let i = Math.max(array.length - count, 0); i < array.length; i++) {
 		yield array[i];
 	}
 }
@@ -39,6 +39,14 @@ if (import.meta.vitest) {
 		const iter = takeLast(numbers, 2);
 
 		expect(iter.toArray()).toEqual([4, 5]);
+	});
+
+	it("takeLast clamps count to length", () => {
+		expect(takeLast([1, 2, 3], 10).toArray()).toEqual([1, 2, 3]);
+	});
+
+	it("takeLast with a non-array iterable", () => {
+		expect(takeLast(new Set([1, 2, 3, 4, 5]), 2).toArray()).toEqual([4, 5]);
 	});
 
 	it("takeLast throws with negative count", () => {

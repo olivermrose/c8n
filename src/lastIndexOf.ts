@@ -18,6 +18,10 @@
  * ```
  */
 export function lastIndexOf<T>(iterable: Iterable<T>, element: T): number {
+	if (Array.isArray(iterable)) {
+		return iterable.lastIndexOf(element);
+	}
+
 	let lastIndex = -1;
 	let index = 0;
 
@@ -37,5 +41,14 @@ if (import.meta.vitest) {
 
 		expect(lastIndexOf(numbers, 1)).toEqual(2);
 		expect(lastIndexOf(numbers, 5)).toEqual(-1);
+	});
+
+	it("lastIndexOf with a non-array iterable", () => {
+		function* gen() {
+			yield* [1, 2, 1, 3];
+		}
+
+		expect(lastIndexOf(gen(), 1)).toEqual(2);
+		expect(lastIndexOf(gen(), 5)).toEqual(-1);
 	});
 }
