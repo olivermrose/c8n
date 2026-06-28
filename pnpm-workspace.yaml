@@ -1,12 +1,12 @@
 allowBuilds:
-    esbuild: false
+  esbuild: false
 catalog:
-    vite: npm:@voidzero-dev/vite-plus-core@latest
-    vite-plus: latest
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plus: latest
 overrides:
-    vite: "catalog:"
+  vite: "catalog:"
 peerDependencyRules:
-    allowAny:
-        - vite
-    allowedVersions:
-        vite: "*"
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"

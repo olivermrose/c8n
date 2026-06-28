@@ -39,6 +39,14 @@ export default defineConfig({
 	fmt: {
 		tabWidth: 4,
 		useTabs: true,
-		ignorePatterns: [],
+		overrides: [
+			{
+				files: ["*.yml", "*.yaml"],
+				options: {
+					tabWidth: 2,
+					useTabs: false,
+				},
+			},
+		],
 	},
 });
