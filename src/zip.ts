@@ -53,13 +53,16 @@ export function* zip<T extends unknown[]>(...iterables: Rest<T>): Generator<T> {
 	const iterators = iterables.map((iter) => iter[Symbol.iterator]());
 
 	while (true) {
-		const results = iterators.map((iter) => iter.next());
+		const tuple = Array.from({ length: iterators.length });
 
-		if (results.some((r) => r.done)) {
-			return;
+		for (let i = 0; i < iterators.length; i++) {
+			const result = iterators[i].next();
+			if (result.done) return;
+
+			tuple[i] = result.value;
 		}
 
-		yield results.map((r) => r.value) as T;
+		yield tuple as T;
 	}
 }
 
