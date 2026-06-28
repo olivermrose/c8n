@@ -11,6 +11,6 @@
 		"verbatimModuleSyntax": true,
 		"resolveJsonModule": true,
 		"stripInternal": true,
-		"types": ["vitest/importMeta"]
+		"types": ["vite-plus/test/importMeta"]
 	}
 }
