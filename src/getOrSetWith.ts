@@ -20,6 +20,10 @@
  * ```
  */
 export function getOrSetWith<K, V>(map: Map<K, V>, key: K, defaultValue: (key: K) => V): V {
+	if (map.getOrInsertComputed) {
+		return map.getOrInsertComputed(key, defaultValue);
+	}
+
 	if (map.has(key)) {
 		return map.get(key)!;
 	}
