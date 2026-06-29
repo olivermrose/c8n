@@ -5,7 +5,7 @@
  *
  * @example
  * ```ts
- * import { maxBy } from "c8n";
+ * import { minBy } from "c8n";
  *
  * const points = [
  * 	{ x: 1, y: 6 },
@@ -13,13 +13,13 @@
  * 	{ x: 5, y: 4 },
  * ];
  *
- * const max = maxBy(points, (pt) => pt.x + pt.y);
+ * const min = minBy(points, (pt) => pt.x + pt.y);
  *
- * console.log(max);
- * // => { x: 5, y: 4 }
+ * console.log(min);
+ * // => { x: 3, y: 2 }
  * ```
  */
-export function minOf<T>(
+export function minBy<T>(
 	iterable: Iterable<T>,
 	selector: (element: T) => bigint | number,
 ): T | undefined {
@@ -48,29 +48,29 @@ export function minOf<T>(
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("minOf with bigints", () => {
+	it("minBy with bigints", () => {
 		const points = [
 			{ x: 1n, y: 6n },
 			{ x: 3n, y: 2n },
 			{ x: 5n, y: 4n },
 		];
 
-		const min = minOf(points, (pt) => pt.x + pt.y);
+		const min = minBy(points, (pt) => pt.x + pt.y);
 
 		expect(min).toEqual({ x: 3n, y: 2n });
-		expect(minOf([], () => 0)).toBeUndefined();
+		expect(minBy([], () => 0)).toBeUndefined();
 	});
 
-	it("minOf with numbers", () => {
+	it("minBy with numbers", () => {
 		const points = [
 			{ x: 1, y: 6 },
 			{ x: 3, y: 2 },
 			{ x: 5, y: 4 },
 		];
 
-		const min = minOf(points, (pt) => pt.x + pt.y);
+		const min = minBy(points, (pt) => pt.x + pt.y);
 
 		expect(min).toEqual({ x: 3, y: 2 });
-		expect(minOf([], () => 0)).toBeUndefined();
+		expect(minBy([], () => 0)).toBeUndefined();
 	});
 }
