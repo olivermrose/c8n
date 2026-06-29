@@ -1,12 +1,17 @@
 /**
- * Produces a generator that yields the elements that are present in each of the
- * {@link iterables}. The first iterable is used as the source.
+ * Produces a generator that yields the distinct elements that are present in
+ * each of the {@link iterables}. The first iterable is used as the source, and
+ * each common element is yielded at most once.
+ *
+ * @see {@link union}
+ * @see {@link difference}
+ * @see {@link symmetricDifference}
  *
  * @example
  * ```ts
  * import { intersect } from "c8n";
  *
- * const iter = intersect([1, 2, 3], [5, 2, 3, 9]);
+ * const iter = intersect([1, 2, 2, 3], [5, 2, 3, 9]);
  *
  * console.log(iter.toArray());
  * // => [2, 3]
@@ -18,8 +23,11 @@ export function* intersect<T>(...iterables: Iterable<T>[]): Generator<T> {
 	const source = iterables.shift()!;
 	const sets = iterables.map((iter) => new Set(iter));
 
+	const seen = new Set<T>();
+
 	for (const element of source) {
-		if (sets.every((set) => set.has(element))) {
+		if (!seen.has(element) && sets.every((set) => set.has(element))) {
+			seen.add(element);
 			yield element;
 		}
 	}
@@ -29,7 +37,7 @@ if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
 	it("intersect", () => {
-		const iter = intersect([1, 2, 3], [5, 2, 3, 9]);
+		const iter = intersect([1, 2, 2, 3], [5, 2, 3, 9]);
 
 		expect(iter.next().value).toBe(2);
 		expect(iter.next().value).toBe(3);
