@@ -74,6 +74,7 @@ export * from "./take";
 export * from "./takeLast";
 export * from "./takeLastWhile";
 export * from "./takeWhile";
+export * from "./tap";
 export * from "./toSet";
 export * from "./transpose";
 export * from "./unique";
