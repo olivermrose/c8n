@@ -67,6 +67,8 @@ export * from "./sliceBefore";
 export * from "./slices";
 export * from "./sliceWhen";
 export * from "./some";
+export * from "./span";
+export * from "./splitAt";
 export * from "./stepBy";
 export * from "./sum";
 export * from "./sumOf";
