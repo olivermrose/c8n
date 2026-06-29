@@ -61,6 +61,7 @@ export * from "./range";
 export * from "./reduce";
 export * from "./reduceRight";
 export * from "./reject";
+export * from "./scan";
 export * from "./shuffle";
 export * from "./sliceAfter";
 export * from "./sliceBefore";
