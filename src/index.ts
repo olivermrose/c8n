@@ -59,6 +59,7 @@ export * from "./productOf";
 export * from "./random";
 export * from "./range";
 export * from "./reduce";
+export * from "./reduceRight";
 export * from "./reject";
 export * from "./shuffle";
 export * from "./sliceAfter";
