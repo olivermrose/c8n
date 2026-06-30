@@ -10,19 +10,17 @@ import type { sum } from "./";
  * ```ts
  * import { sumOf } from "c8n";
  *
- * const names = ["Alice", "Bob", "Charlie"];
- *
- * console.log(sumOf(names, (name) => name.length));
- * // => 15
+ * console.log(sumOf([1n, 2n, 3n], (x) => x * 2n));
+ * // => 12n
  * ```
  */
-export function sumOf<T>(iterable: Iterable<T>, selector: (element: T) => number): number {
+export function sumOf<T>(iterable: Iterable<T>, selector: (element: T) => bigint): bigint {
 	let result: number | bigint;
 
 	const iterator = iterable[Symbol.iterator]();
 	let next = iterator.next();
 
-	if (next.done) return 0;
+	if (next.done) return 0n;
 
 	result = selector(next.value);
 	next = iterator.next();
@@ -38,12 +36,12 @@ export function sumOf<T>(iterable: Iterable<T>, selector: (element: T) => number
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("sumOf", () => {
+	it("sumOf bigint", () => {
 		const names = ["Alice", "Bob", "Charlie"];
 
-		expect(sumOf([], (x) => x)).toBe(0);
-		expect(sumOf(names, (name) => name.length)).toBe(15);
-		expect(sumOf([1, 2, 3], (x) => x * 2)).toBe(12);
-		expect(sumOf([1, 2, 3].values(), (x) => x * 2)).toBe(12);
+		expect(sumOf([], (x) => x)).toBe(0n);
+		expect(sumOf(names, (name) => BigInt(name.length))).toBe(15n);
+		expect(sumOf([1n, 2n, 3n], (x) => x * 2n)).toBe(12n);
+		expect(sumOf([1n, 2n, 3n].values(), (x) => x * 2n)).toBe(12n);
 	});
 }

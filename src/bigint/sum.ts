@@ -9,20 +9,20 @@ import { sumOf } from "./";
  * ```ts
  * import { sum } from "c8n";
  *
- * console.log(sum([1, 2, 3]));
- * // => 6
+ * console.log(sum([1n, 2n, 3n]));
+ * // => 6n
  * ```
  */
-export function sum(iterable: Iterable<number>): number {
+export function sum(iterable: Iterable<bigint>): bigint {
 	return sumOf(iterable, (element) => element);
 }
 
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("sum", () => {
-		expect(sum([])).toBe(0);
-		expect(sum([1, 2, 3])).toBe(6);
-		expect(sum([1, 2, 3].values())).toBe(6);
+	it("sum bigint", () => {
+		expect(sum([])).toBe(0n);
+		expect(sum([1n, 2n, 3n])).toBe(6n);
+		expect(sum([1n, 2n, 3n].values())).toBe(6n);
 	});
 }

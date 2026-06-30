@@ -9,20 +9,20 @@ import { productOf } from "./";
  * ```ts
  * import { product } from "c8n";
  *
- * console.log(product([2, 4, 6]));
- * // => 48
+ * console.log(product([2n, 4n, 6n]));
+ * // => 48n
  * ```
  */
-export function product(iterable: Iterable<number>): number {
+export function product(iterable: Iterable<bigint>): bigint {
 	return productOf(iterable, (element) => element);
 }
 
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("product", () => {
-		expect(product([])).toBe(0);
-		expect(product([2, 4, 6])).toBe(48);
-		expect(product([2, 4, 6].values())).toBe(48);
+	it("product bigint", () => {
+		expect(product([])).toBe(0n);
+		expect(product([2n, 4n, 6n])).toBe(48n);
+		expect(product([2n, 4n, 6n].values())).toBe(48n);
 	});
 }

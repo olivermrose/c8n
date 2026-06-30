@@ -10,19 +10,17 @@ import type { product } from "./";
  * ```ts
  * import { productOf } from "c8n";
  *
- * const names = ["Alice", "Bob", "Charlie"];
- *
- * console.log(productOf(names, (name) => name.length));
- * // => 105
+ * console.log(productOf([1n, 2n, 3n], (x) => x * 2n));
+ * // => 48n;
  * ```
  */
-export function productOf<T>(iterable: Iterable<T>, selector: (element: T) => number): number {
+export function productOf<T>(iterable: Iterable<T>, selector: (element: T) => bigint): bigint {
 	let result: number | bigint;
 
 	const iterator = iterable[Symbol.iterator]();
 	let next = iterator.next();
 
-	if (next.done) return 0;
+	if (next.done) return 0n;
 
 	result = selector(next.value);
 	next = iterator.next();
@@ -38,12 +36,12 @@ export function productOf<T>(iterable: Iterable<T>, selector: (element: T) => nu
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("productOf", () => {
+	it("productOf bigint", () => {
 		const names = ["Alice", "Bob", "Charlie"];
 
-		expect(productOf([], (x) => x)).toBe(0);
-		expect(productOf(names, (name) => name.length)).toBe(105);
-		expect(productOf([1, 2, 3], (x) => x * 2)).toBe(48);
-		expect(productOf([1, 2, 3].values(), (x) => x * 2)).toBe(48);
+		expect(productOf([], (x) => x)).toBe(0n);
+		expect(productOf(names, (name) => BigInt(name.length))).toBe(105n);
+		expect(productOf([1n, 2n, 3n], (x) => x * 2n)).toBe(48n);
+		expect(productOf([1n, 2n, 3n].values(), (x) => x * 2n)).toBe(48n);
 	});
 }

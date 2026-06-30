@@ -5,7 +5,7 @@ export default defineConfig({
 		"*": "vp check --fix",
 	},
 	pack: {
-		entry: ["src/index.ts"],
+		entry: ["src/index.ts", "src/bigint/index.ts"],
 		minify: true,
 		target: ["es2020"],
 		define: {

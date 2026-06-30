@@ -7,25 +7,25 @@ import { sum } from "./";
  * ```ts
  * import { average } from "c8n";
  *
- * const numbers = [1, 2, 3, 4, 5];
+ * const numbers = [1n, 2n, 3n, 4n, 5n];
  * const avg = average(numbers);
  *
  * console.log(avg);
- * // => 3
+ * // => 3n
  * ```
  */
-export function average(iterable: Iterable<number>): number {
+export function average(iterable: Iterable<bigint>) {
 	const array = [...iterable];
 
-	return sum(array) / array.length;
+	return sum(array) / BigInt(array.length);
 }
 
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;
 
-	it("average", () => {
-		expect(average([])).toBeNaN();
-		expect(average([1, 2, 3, 4, 5])).toBe(3);
-		expect(average([1, 2, 3, 4, 5].values())).toBe(3);
+	it("average bigint", () => {
+		expect(() => average([])).toThrow("zero");
+		expect(average([1n, 2n, 3n, 4n, 5n])).toBe(3n);
+		expect(average([1n, 2n, 3n, 4n, 5n].values())).toBe(3n);
 	});
 }

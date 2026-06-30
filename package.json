@@ -7,8 +7,16 @@
 		"dist"
 	],
 	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.mts"
+		},
+		"./bigint": {
+			"import": "./dist/bigint/index.mjs",
+			"types": "./dist/bigint/index.d.mts"
+		}
+	},
 	"scripts": {
 		"build": "vp pack",
 		"test": "vp test",
