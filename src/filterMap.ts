@@ -37,7 +37,7 @@ import { filter, map } from "./";
  */
 export function* filterMap<T, U>(
 	iterable: Iterable<T>,
-	transform: (element: T) => U,
+	transform: (element: T) => U | null | undefined,
 ): Generator<U> {
 	for (const element of iterable) {
 		const value = transform(element);
