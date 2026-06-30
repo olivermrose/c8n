@@ -1,6 +1,6 @@
 {
 	"name": "c8n",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"description": "A modern and functional kitchen sink collection library inspired by Kotlin, Ruby, and Rust.",
 	"author": "Oliver Rose <hello@olivermrose.com>",
 	"files": [
