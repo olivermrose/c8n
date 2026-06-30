@@ -1,5 +1,7 @@
 import { dropWhile, takeWhile } from "./";
 
+export type Span<T> = [takeWhile: Generator<T>, dropWhile: Generator<T>];
+
 /**
  * Returns a pair of generators splitting the {@link iterable} at the first
  * element that does not satisfy the {@link predicate}. The first generator
@@ -27,10 +29,7 @@ import { dropWhile, takeWhile } from "./";
  * // => [3, 4, 1]
  * ```
  */
-export function span<T>(
-	iterable: Iterable<T>,
-	predicate: (element: T) => boolean,
-): [takeWhile: Generator<T>, dropWhile: Generator<T>] {
+export function span<T>(iterable: Iterable<T>, predicate: (element: T) => boolean): Span<T> {
 	return [takeWhile(iterable, predicate), dropWhile(iterable, predicate)];
 }
 

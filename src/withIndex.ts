@@ -1,3 +1,5 @@
+export type WithIndex<T> = Generator<[element: T, index: number]>;
+
 /**
  * Produces a generator that yields a pair of the element and its index in the
  * {@link iterable}.
@@ -17,7 +19,7 @@
  * // => ["c", 2]
  * ```
  */
-export function* withIndex<T>(iterable: Iterable<T>): Generator<[T, number]> {
+export function* withIndex<T>(iterable: Iterable<T>): WithIndex<T> {
 	let index = 0;
 
 	for (const element of iterable) {

@@ -1,6 +1,8 @@
 import { filter } from "./filter";
 import { reject } from "./reject";
 
+export type Partition<T, U extends T = T> = [filter: Generator<U>, reject: Generator<T>];
+
 /**
  * Returns a pair of the generators from calling {@link filter} and
  * {@link reject} on the {@link iterable}.
@@ -25,7 +27,7 @@ import { reject } from "./reject";
 export function partition<T>(
 	iterable: Iterable<T>,
 	predicate: (element: T) => boolean,
-): [filter: Generator<T>, reject: Generator<T>];
+): Partition<T>;
 
 /**
  * Returns a pair of the generators from calling {@link filter} and
@@ -51,11 +53,11 @@ export function partition<T>(
 export function partition<T, U extends T>(
 	iterable: Iterable<T>,
 	predicate: (element: T) => element is U,
-): [filter: Generator<U>, reject: Generator<T>];
+): Partition<T, U>;
 export function partition<T>(
 	iterable: Iterable<T>,
 	predicate: (element: T) => boolean,
-): [Generator<T>, Generator<T>] {
+): Partition<T> {
 	return [filter(iterable, predicate), reject(iterable, predicate)];
 }
 

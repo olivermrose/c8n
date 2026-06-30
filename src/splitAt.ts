@@ -1,5 +1,7 @@
 import { drop, take } from "./";
 
+export type SplitAt<T> = [take: Generator<T>, drop: Generator<T>];
+
 /**
  * Returns a pair of generators splitting the {@link iterable} at the given
  * {@link index}. The first generator yields the elements before {@link index}
@@ -25,10 +27,7 @@ import { drop, take } from "./";
  * // => [3, 4, 5]
  * ```
  */
-export function splitAt<T>(
-	iterable: Iterable<T>,
-	index: number,
-): [take: Generator<T>, drop: Generator<T>] {
+export function splitAt<T>(iterable: Iterable<T>, index: number): SplitAt<T> {
 	return [take(iterable, index), drop(iterable, index)];
 }
 

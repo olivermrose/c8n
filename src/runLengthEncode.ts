@@ -1,3 +1,5 @@
+export type RunLengthEncode<T> = Generator<[element: T, count: number]>;
+
 /**
  * Produces a generator that yields `[element, count]` tuples describing the
  * consecutive runs of equal elements in the {@link iterable}.
@@ -17,7 +19,7 @@
  * // => [["a", 3], ["b", 2], ["c", 1]]
  * ```
  */
-export function* runLengthEncode<T>(iterable: Iterable<T>): Generator<[element: T, count: number]> {
+export function* runLengthEncode<T>(iterable: Iterable<T>): RunLengthEncode<T> {
 	const iterator = iterable[Symbol.iterator]();
 
 	let next = iterator.next();
