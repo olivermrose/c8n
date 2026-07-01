@@ -85,6 +85,7 @@ export * from "./takeWhile";
 export * from "./tap";
 export * from "./toSet";
 export * from "./transpose";
+export * from "./treeReduce";
 export * from "./unique";
 export * from "./uniqueBy";
 export * from "./windows";
